@@ -2,15 +2,22 @@
 // ---------------------------------
 
 const opencage = require('opencage-api-client');
+const request = require('request-promise');
 require('dotenv').config();
 
 const getPositionFromAddress = (address) => {
+  const addressURI = encodeURI(address)
   const requestObj = {
-    key: '<MY_API_KEY>',
-    q: '<QUERY_STRING>',
+    key: process.env.OPENCAGE_API_KEY,
+    q: addressURI,
   };
 
-  // return something...
+   const { key, q } = requestObj
+
+  return request(`https://api.opencagedata.com/geocode/v1/json?q=${q}&key=${key}`)
+  .then((res) => JSON.parse(res))
+  .then(data => data.results[0].geometry)
+
 };
 
 getPositionFromAddress(
