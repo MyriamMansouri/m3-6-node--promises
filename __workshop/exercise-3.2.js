@@ -24,5 +24,8 @@ const getPositionFromAddress = (address) => {
 };
 
 getPositionFromAddress(
-  '1455 Boulevard de Maisonneuve O, Montréal, QC H3G 1M8'
+  '123 boulevard de valmy 92700 colombes'
 ).then((response) => console.log(response));
+
+
+module.exports = { getPositionFromAddress }
